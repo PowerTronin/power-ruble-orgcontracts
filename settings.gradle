@@ -1,0 +1,27 @@
+pluginManagement {
+    repositories {
+        maven {
+            name = 'Fabric'
+            url = 'https://maven.fabricmc.net/'
+        }
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
+    repositories {
+        maven {
+            name = 'Fabric'
+            url = 'https://maven.fabricmc.net/'
+        }
+        maven {
+            name = 'Mojang Libraries'
+            url = 'https://libraries.minecraft.net/'
+        }
+        mavenCentral()
+    }
+}
+
+rootProject.name = 'power-ruble-orgcontracts'
