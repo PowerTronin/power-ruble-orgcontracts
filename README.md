@@ -87,11 +87,13 @@ After editing config:
 
 ## Development note
 
-This repository currently builds against a vendored base development jar:
+This repository downloads the matching base development jar from the `power-ruble` release assets on demand:
 
-- `libs/power-ruble-1.1.0-dev.jar`
+- `https://github.com/PowerTronin/power-ruble/releases`
 
-That keeps the addon independently buildable before a proper published API artifact exists.
+The version is controlled by:
+
+- `base_mod_version` in `gradle.properties`
 
 ## Build
 
