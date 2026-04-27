@@ -265,9 +265,19 @@ public final class PowerRubleOrgContractsMod implements ModInitializer {
 
             dispatcher.register(
                 CommandManager.literal("orgcontracts")
+                    .then(CommandManager.literal("help")
+                        .executes(context -> showHelp(context.getSource()))
+                    )
                     .then(CommandManager.literal("reload")
                         .requires(source -> source.hasPermissionLevel(2))
                         .executes(context -> reloadConfig(context.getSource()))
+                    )
+            );
+
+            dispatcher.register(
+                CommandManager.literal("help")
+                    .then(CommandManager.literal("orgcontracts")
+                        .executes(context -> showHelp(context.getSource()))
                     )
             );
         });
@@ -898,6 +908,33 @@ public final class PowerRubleOrgContractsMod implements ModInitializer {
     private static int reloadConfig(ServerCommandSource source) {
         config = OrgContractsConfig.load();
         source.sendFeedback(() -> Text.literal("Power Ruble org/contracts config reloaded."), true);
+        return 1;
+    }
+
+    private static int showHelp(ServerCommandSource source) {
+        source.sendFeedback(() -> Text.literal("Power Ruble Org Contracts commands:"), false);
+        source.sendFeedback(() -> Text.literal("/org create <name>"), false);
+        source.sendFeedback(() -> Text.literal("/org info"), false);
+        source.sendFeedback(() -> Text.literal("/org members"), false);
+        source.sendFeedback(() -> Text.literal("/org balance"), false);
+        source.sendFeedback(() -> Text.literal("/org deposit <amount> [comment]"), false);
+        source.sendFeedback(() -> Text.literal("/org pay <player> <amount> [comment]"), false);
+        source.sendFeedback(() -> Text.literal("/org history"), false);
+        source.sendFeedback(() -> Text.literal("/org invite <player>"), false);
+        source.sendFeedback(() -> Text.literal("/org join"), false);
+        source.sendFeedback(() -> Text.literal("/org leave"), false);
+        source.sendFeedback(() -> Text.literal("/org kick <player>"), false);
+        source.sendFeedback(() -> Text.literal("/org role <player> manager|member"), false);
+        source.sendFeedback(() -> Text.literal("/contract create item <item> <count> <reward>"), false);
+        source.sendFeedback(() -> Text.literal("/contract list"), false);
+        source.sendFeedback(() -> Text.literal("/contract view <id>"), false);
+        source.sendFeedback(() -> Text.literal("/contract accept <id>"), false);
+        source.sendFeedback(() -> Text.literal("/contract deliver <id> <amount>"), false);
+        source.sendFeedback(() -> Text.literal("/contract cancel <id>"), false);
+        source.sendFeedback(() -> Text.literal("/contract history <id>"), false);
+        if (source.hasPermissionLevel(2)) {
+            source.sendFeedback(() -> Text.literal("/orgcontracts reload"), false);
+        }
         return 1;
     }
 
